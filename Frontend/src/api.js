@@ -22,6 +22,7 @@ export const getCategories = ()   => api.get('/menu/categories')
 // ── Orders ──────────────────────────────────────────────────────
 export const placeOrder = (data) => api.post('/orders/place', data)
 export const myOrders   = ()     => api.get('/orders/my')
+export const orderAnalytics = () => api.get('/orders/analytics')
 
 // ── Admin ───────────────────────────────────────────────────────
 export const adminStats        = ()          => api.get('/admin/stats')

@@ -2,6 +2,7 @@ import { Trash2, Flame, AlertTriangle, CheckCircle, ShoppingBag } from 'lucide-r
 import { useCartStore, useAuthStore, GOALS } from '../store'
 import { placeOrder } from '../api'
 import { useState } from 'react'
+import { useToast } from './Toast'
 import { useNavigate } from 'react-router-dom'
 
 export default function Cart() {
@@ -9,6 +10,7 @@ export default function Cart() {
   const user = useAuthStore(s => s.user)
   const navigate = useNavigate()
   const [placing, setPlacing] = useState(false)
+  const toast = useToast()
   const [success, setSuccess] = useState(false)
 
   const totalPrice   = items.reduce((s, i) => s + i.price * i.qty, 0)
@@ -40,7 +42,7 @@ export default function Cart() {
       setTimeout(() => { setSuccess(false); navigate('/orders') }, 2000)
     } catch (err) {
       const msg = err.response?.data?.detail || err.message || 'Order failed. Try again.';
-      alert(msg);
+      toast.error(msg);
     }
     finally { setPlacing(false) }
   }

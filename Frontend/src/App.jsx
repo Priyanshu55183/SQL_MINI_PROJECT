@@ -8,6 +8,8 @@ import Register from './pages/Register'
 import MyOrders from './pages/MyOrders'
 import Profile from './pages/Profile'
 import Admin from './pages/Admin'
+import NotFound from './pages/NotFound'
+import ERDiagram from './pages/ERDiagram'
 
 function Protected({ children }) {
   const token = useAuthStore(s => s.token)
@@ -32,6 +34,8 @@ export default function App() {
         <Route path="/orders"    element={<Protected><MyOrders /></Protected>} />
         <Route path="/profile"   element={<Protected><Profile /></Protected>} />
         <Route path="/admin"     element={<Protected><AdminOnly><Admin /></AdminOnly></Protected>} />
+        <Route path="/schema"    element={<ERDiagram />} />
+        <Route path="*"          element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   )
